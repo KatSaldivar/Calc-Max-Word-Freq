@@ -81,6 +81,7 @@ class Solution
         @analyzers << LineAnalyzer.new(line, index)
       end
     rescue Exception
+      # =>  print out error message if there is an error
       puts e.message
     end
   end
@@ -90,8 +91,11 @@ class Solution
   # =>  identifies the LineAnalyzer objects in the analyzers array that have highest_wf_count equal to highest_count_across_lines 
   #     attribute value determined previously and stores them in highest_count_words_across_lines.
   def calculate_line_with_highest_frequency
+    # =>  sort the analyzer list and find the hight words count
     @highest_count_across_lines = @analyzers.sort {|x,y| y.highest_wf_count <=> x.highest_wf_count}
                                             .first.highest_wf_count
+
+    # =>  select all the analyzers with the highest word count
     @highest_count_words_across_lines = @analyzers.select { |x| x.highest_wf_count == @highest_count_across_lines}
   end
   
